@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="HOW2J2EETest:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/HOW2J2EETest_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="HOW2J2EETest" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.4" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="HOW2J2EETest/web/Web" />
+    </root>
+  </artifact>
+</component>
