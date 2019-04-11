@@ -1,6 +1,7 @@
 package Servlets;
 
 import CRUD.DAO.ProductMapper;
+import CRUD.JavaBean.CategoryExample;
 import CRUD.JavaBean.Product;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
