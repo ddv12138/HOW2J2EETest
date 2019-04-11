@@ -23,5 +23,7 @@
     </environments>
     <mappers>
         <mapper class="CRUD.DAO.ProductMapper"/>
+        <mapper class="CRUD.DAO.CategoryDao"/>
+        <mapper resource="generator/CategoryDao.xml"/>
     </mappers>
 </configuration>

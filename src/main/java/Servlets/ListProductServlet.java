@@ -1,6 +1,8 @@
 package Servlets;
 
+import CRUD.DAO.CategoryDao;
 import CRUD.DAO.ProductMapper;
+import CRUD.JavaBean.Category;
 import CRUD.JavaBean.CategoryExample;
 import CRUD.JavaBean.Product;
 import org.apache.ibatis.io.Resources;
@@ -33,15 +35,21 @@ public class ListProductServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         if (null != this.session) {
             ProductMapper pm = this.session.getMapper(ProductMapper.class);
             List<Product> products = pm.ListProduct();
+            CategoryExample ce = new CategoryExample();
+            ce.setOrderByClause("id");
+            CategoryDao cm = session.getMapper(CategoryDao.class);
+            List<Category> categories = cm.selectByExample(ce);
             StringBuffer sb = new StringBuffer();
             sb.append("<table align='center' border='1' cellspacing='0'>\r\n");
-            sb.append("<tr><td>id</td><td>name</td><td>price</td><td>cid</td></tr>\r\n");
-            String trFormat = "<tr><td>%s</td><td>%s</td><td>%f</td><td>%s</td></tr>\r\n";
-            for (Product product : products) {
-                String tr = String.format(trFormat, product.getId(), product.getName(), product.getPrice(), product.getCid());
+            sb.append("<tr><td>id</td><td>name</td></tr>\r\n");
+            String trFormat = "<tr><td>%s</td><td>%s</td></tr>\r\n";
+            for (Category category : categories) {
+                String tr = String.format(trFormat, category.getId(), category.getName());
                 sb.append(tr);
             }
             sb.append("</table>");
