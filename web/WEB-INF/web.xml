@@ -37,4 +37,13 @@
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/uploadPhoto</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListProductServlet</servlet-name>
+        <servlet-class>Servlets.ListProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListProductServlet</servlet-name>
+        <url-pattern>/listProduct</url-pattern>
+    </servlet-mapping>
 </web-app>
