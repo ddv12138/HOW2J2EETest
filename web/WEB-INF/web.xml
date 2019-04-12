@@ -55,4 +55,13 @@
         <servlet-name>AddProductServlet</servlet-name>
         <url-pattern>/addProduct</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <servlet-class>Servlets.DeleteProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <url-pattern>/deleteProduct</url-pattern>
+    </servlet-mapping>
 </web-app>
