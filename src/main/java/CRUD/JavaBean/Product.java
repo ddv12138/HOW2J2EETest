@@ -1,8 +1,19 @@
 package CRUD.JavaBean;
 
+import java.util.UUID;
+
 public class Product {
     String id, name, cid;
     Double price;
+
+    public Product(String name, Double price) {
+        this.id = UUID.randomUUID().toString().replaceAll("-", "");
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product() {
+    }
 
     @Override
     public String toString() {

@@ -46,4 +46,13 @@
         <servlet-name>ListProductServlet</servlet-name>
         <url-pattern>/listProduct</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddProductServlet</servlet-name>
+        <servlet-class>Servlets.addProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddProductServlet</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
 </web-app>
