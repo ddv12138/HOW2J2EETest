@@ -1,34 +1,22 @@
 package CRUD.JavaBean;
 
-import java.util.UUID;
+import java.io.Serializable;
 
-public class Product {
-    String id, name, cid;
-    Double price;
+/**
+ * Product
+ *
+ * @author
+ */
+public class Product implements Serializable {
+    private String id;
 
-    public Product(String name, Double price) {
-        this.id = UUID.randomUUID().toString().replaceAll("-", "");
-        this.name = name;
-        this.price = price;
-    }
+    private String name;
 
-    public Product() {
-    }
+    private Float price;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"id\":\"")
-                .append(id).append('\"');
-        sb.append(",\"name\":\"")
-                .append(name).append('\"');
-        sb.append(",\"cid\":\"")
-                .append(cid).append('\"');
-        sb.append(",\"price\":")
-                .append(price);
-        sb.append('}');
-        return sb.toString();
-    }
+    private String cid;
+
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -46,19 +34,19 @@ public class Product {
         this.name = name;
     }
 
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
     public String getCid() {
         return cid;
     }
 
     public void setCid(String cid) {
         this.cid = cid;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 }

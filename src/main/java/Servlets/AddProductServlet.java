@@ -1,6 +1,6 @@
 package Servlets;
 
-import CRUD.DAO.ProductMapper;
+import CRUD.DAO.ProductDao;
 import CRUD.JavaBean.Product;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,21 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
-public class addProductServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
         String name = req.getParameter("name");
         String price = req.getParameter("price");
-        Product p = new Product(name, Double.parseDouble(price));
+        Product p = new Product();
+        p.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+        p.setName(name);
+        p.setPrice(Float.parseFloat(price));
         InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
         SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(is);
         SqlSession session = ssf.openSession();
         try {
-            ProductMapper pm = session.getMapper(ProductMapper.class);
-            pm.Insert(p);
+            ProductDao pm = session.getMapper(ProductDao.class);
+            pm.insert(p);
             session.commit();
             resp.getWriter().println("success");
             resp.sendRedirect("listProduct");

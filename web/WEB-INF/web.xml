@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>AddProductServlet</servlet-name>
-        <servlet-class>Servlets.addProductServlet</servlet-class>
+        <servlet-class>Servlets.AddProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddProductServlet</servlet-name>
@@ -63,5 +63,14 @@
     <servlet-mapping>
         <servlet-name>DeleteProductServlet</servlet-name>
         <url-pattern>/deleteProduct</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <servlet-class>Servlets.EditProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <url-pattern>/editProduct</url-pattern>
     </servlet-mapping>
 </web-app>

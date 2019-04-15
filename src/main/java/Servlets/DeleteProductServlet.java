@@ -1,6 +1,6 @@
 package Servlets;
 
-import CRUD.DAO.ProductMapper;
+import CRUD.DAO.ProductDao;
 import CRUD.JavaBean.Product;
 import com.mysql.cj.util.StringUtils;
 import org.apache.ibatis.io.Resources;
@@ -25,10 +25,10 @@ public class DeleteProductServlet extends HttpServlet {
             SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(is);
             SqlSession session = ssf.openSession();
             try {
-                ProductMapper pm = session.getMapper(ProductMapper.class);
+                ProductDao pm = session.getMapper(ProductDao.class);
                 Product p = new Product();
                 p.setId(id);
-                pm.DeleteById(p);
+                pm.deleteByPrimaryKey(id);
                 session.commit();
                 resp.getWriter().println("删除成功");
             } catch (Exception e) {

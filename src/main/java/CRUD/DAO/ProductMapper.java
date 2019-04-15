@@ -4,6 +4,7 @@ import CRUD.JavaBean.Product;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -16,4 +17,10 @@ public interface ProductMapper {
 
     @Delete("delete from Product where id = #{id}")
     int DeleteById(Product p);
+
+    @Select("select * from Product where id = #{id}")
+    Product getById(String id);
+
+    @Update("")
+    int UpdateProduct(Product p);
 }
