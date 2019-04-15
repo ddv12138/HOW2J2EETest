@@ -1,7 +1,6 @@
 package Servlets;
 
 import CRUD.DAO.ProductDao;
-import CRUD.DAO.ProductMapper;
 import CRUD.JavaBean.Product;
 import CRUD.JavaBean.ProductExample;
 import org.apache.ibatis.io.Resources;

@@ -2,6 +2,7 @@ package Servlets;
 
 import CRUD.DAO.ProductDao;
 import CRUD.JavaBean.Product;
+import com.mysql.cj.util.StringUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -27,7 +28,7 @@ public class EditProductServlet extends HttpServlet {
         StringBuffer format = new StringBuffer();
 
         format.append("<!DOCTYPE html>");
-        format.append("<form action='updateHero' method='post'>");
+        format.append("<form action='updateProduct' method='post'>");
         format.append("名字 ： <input type='text' name='name' value='%s' > <br>");
         format.append("价格 ： <input type='text' name='hp'  value='%f' > <br>");
         format.append("cid： <input type='text' name='damage'  value='%s' > <br>");
@@ -35,7 +36,8 @@ public class EditProductServlet extends HttpServlet {
         format.append("<input type='submit' value='更新'>");
         format.append("</form>");
 
-        String html = String.format(format.toString(), p.getName(), p.getPrice(), p.getCid(), p.getId());
+        String cid = StringUtils.isNullOrEmpty(p.getCid()) ? "" : p.getCid();
+        String html = String.format(format.toString(), p.getName(), p.getPrice(), cid, p.getId());
         resp.getWriter().write(html);
     }
 }
