@@ -19,8 +19,6 @@ import java.util.UUID;
 public class AddProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         String datastr = req.getParameter("data");
         Product p = JSON.parseObject(datastr, Product.class);

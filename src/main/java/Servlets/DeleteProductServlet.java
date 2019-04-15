@@ -17,8 +17,6 @@ import java.io.InputStream;
 public class DeleteProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
         String id = req.getParameter("id");
         if (!StringUtils.isNullOrEmpty(id)) {
             InputStream is = Resources.getResourceAsStream("mybatis-config.xml");

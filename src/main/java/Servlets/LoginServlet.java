@@ -8,8 +8,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.setCharacterEncoding("UTF-8");
-            response.setContentType("text/html; charset=UTF-8");
             String name = request.getParameter("name");
             String password = request.getParameter("password");
 

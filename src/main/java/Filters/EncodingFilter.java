@@ -3,22 +3,20 @@ package Filters;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Date;
 
-public class HelloFilter implements Filter {
+public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        String ip = servletRequest.getRemoteAddr();
-        String url = req.getRequestURL().toString();
-        System.out.printf("%s %s 访问了 %s%n", new Date(), ip, url);
+        req.setCharacterEncoding("UTF-8");
+        servletResponse.setCharacterEncoding("UTF-8");
         filterChain.doFilter(req, servletResponse);
+        System.out.println("encoding has been set");
     }
 
     @Override

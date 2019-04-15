@@ -18,8 +18,6 @@ import java.io.InputStream;
 public class EditProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
         String id = req.getParameter("id");
         InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
         SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(is);
