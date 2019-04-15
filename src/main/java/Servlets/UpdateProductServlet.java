@@ -34,6 +34,6 @@ public class UpdateProductServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("/listProduct");
+        resp.sendRedirect("listProduct");
     }
 }

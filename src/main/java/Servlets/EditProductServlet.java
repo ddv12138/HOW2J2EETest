@@ -30,8 +30,8 @@ public class EditProductServlet extends HttpServlet {
         format.append("<!DOCTYPE html>");
         format.append("<form action='updateProduct' method='post'>");
         format.append("名字 ： <input type='text' name='name' value='%s' > <br>");
-        format.append("价格 ： <input type='text' name='hp'  value='%f' > <br>");
-        format.append("cid： <input type='text' name='damage'  value='%s' > <br>");
+        format.append("价格 ： <input type='text' name='price'  value='%f' > <br>");
+        format.append("cid： <input type='text' name='cid'  value='%s' > <br>");
         format.append("<input type='hidden' name='id' value='%s'>");
         format.append("<input type='submit' value='更新'>");
         format.append("</form>");

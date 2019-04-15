@@ -2,6 +2,7 @@ package Servlets;
 
 import CRUD.DAO.ProductDao;
 import CRUD.JavaBean.Product;
+import com.alibaba.fastjson.JSON;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -19,13 +20,11 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
-        String name = req.getParameter("name");
-        String price = req.getParameter("price");
-        Product p = new Product();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        String datastr = req.getParameter("data");
+        Product p = JSON.parseObject(datastr, Product.class);
         p.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-        p.setName(name);
-        p.setPrice(Float.parseFloat(price));
         InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
         SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(is);
         SqlSession session = ssf.openSession();
@@ -34,7 +33,7 @@ public class AddProductServlet extends HttpServlet {
             pm.insert(p);
             session.commit();
             resp.getWriter().println("success");
-            resp.sendRedirect("listProduct");
+            resp.setStatus(200);
         } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().println(e.getMessage());
