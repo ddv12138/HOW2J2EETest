@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <title>登录</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,22 +19,24 @@
             </div>
         </div>
         <div class="form__content">
-            <h1>登录验证</h1>
+            <h1 style="display:none">登录验证</h1>
             <div class="styled-input">
-                <input type="text" class="styled-input__input" name="nickname">
-                <div class="styled-input__placeholder"><span class="styled-input__placeholder-text">用户名</span></div>
+                <input class="styled-input__input" name="nickname" type="text"/>
+                <div class="styled-input__placeholder"><span class="styled-input__placeholder-text">输入用户名</span></div>
                 <div class="styled-input__circle"></div>
             </div>
             <div class="styled-input">
-                <input type="text" class="styled-input__input">
-                <div class="styled-input__placeholder"><span class="styled-input__placeholder-text">密码</span></div>
+                <input class="styled-input__input" type="password"/>
+                <div class="styled-input__placeholder"><span class="styled-input__placeholder-text">输入密码</span></div>
                 <div class="styled-input__circle"></div>
             </div>
             <button type="button" class="styled-button"><span class="styled-button__real-text-holder"> <span
-                    class="styled-button__real-text">Submit</span> <span class="styled-button__moving-block face"> <span
+                    class="styled-button__real-text">登录</span> <span class="styled-button__moving-block face"> <span
                     class="styled-button__text-holder"> <span class="styled-button__text">登录</span> </span> </span><span
                     class="styled-button__moving-block back"> <span class="styled-button__text-holder"> <span
-                    class="styled-button__text">登录</span> </span> </span> </span></button>
+                    class="styled-button__text">登录</span> </span> </span> </span>
+            </button>
+            <a class="styled-button" href="register.html">注册</a>
         </div>
     </form>
 </main>
