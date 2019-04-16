@@ -1,5 +1,7 @@
 package Servlets;
 
+import com.alibaba.fastjson.JSON;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +19,9 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) {
         try {
-            System.out.println("获取单值参数name:" + request.getParameter("name"));
-            String[] hobits = request.getParameterValues("hobits");
-            System.out.println("获取具有多值的参数hobits: " + Arrays.asList(hobits));
-
             System.out.println("通过 getParameterMap 遍历所有的参数： ");
             Map<String, String[]> parameters = request.getParameterMap();
-            for (String key : parameters.keySet()) {
-                for (String value : parameters.get(key)) {
-                    System.out.println(key + "---" + value);
-                }
-            }
+            System.out.println(JSON.toJSONString(parameters));
         } catch (Exception e) {
             e.printStackTrace();
         }

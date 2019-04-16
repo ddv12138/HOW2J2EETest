@@ -2,15 +2,26 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
     <title>register</title>
 </head>
 <body>
-<form action="register" method="get">
-    账号 ： <input type="text" name="name"> <br>
-    爱好 ： LOL<input type="checkbox" name="hobits" value="lol">
-    DOTA<input type="checkbox" name="hobits" value="dota"> <br>
-
-    <input type="submit" value="注册">
+<form method="get">
+    账号 ： <input type="text" name="username" id="username"> <br>
+    密码 ： <input type="password" name="password" id="password"> <br>
+    <input type="button" id="submit" value="注册">
 </form>
+<script>
+    $("#submit").click(function (arg) {
+        var data = {
+            username: $("#username").val(),
+            password: $("#password").val()
+        };
+        console.log(data);
+        $.post("register", data, function (arg) {
+            console.log("res");
+        })
+    });
+</script>
 </body>
 </html>
