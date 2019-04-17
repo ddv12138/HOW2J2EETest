@@ -23,6 +23,8 @@ public class LoginStateFilter implements Filter {
                 || req.getRequestURI().toLowerCase().endsWith("index")
                 || req.getRequestURI().toLowerCase().endsWith("register.html")
                 || req.getRequestURI().toLowerCase().endsWith("register")
+                || req.getRequestURI().toLowerCase().endsWith("login")
+                || req.getRequestURI().toLowerCase().endsWith("login.html")
                 || req.getRequestURI().toLowerCase().matches(pattern)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;

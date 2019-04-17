@@ -4,8 +4,17 @@ window.onload = function () {
             username: $("#username").val(),
             password: $("#password").val()
         };
-        $.post("register", data, function () {
-            console.log("res");
+        $.post("register", data, function (arg) {
+            console.log(arg);
+            let res = JSON.parse(arg);
+            if (res.flag) {
+                alert("注册成功");
+                window.open("login.html", "_self", "");
+            } else {
+                alert("失败");
+                $("#username").val("");
+                $("#password").val("");
+            }
         })
     });
     'use strict';

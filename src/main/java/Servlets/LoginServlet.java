@@ -26,27 +26,27 @@ public class LoginServlet extends HttpServlet {
             InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory sf = new SqlSessionFactoryBuilder().build(is);
             SqlSession session = sf.openSession();
+            Map<String, Object> res = new HashMap<>();
             try {
                 UsertableDao ud = session.getMapper(UsertableDao.class);
                 UsertableExample example = new UsertableExample();
                 example.createCriteria().andNameEqualTo(name);
                 List<Usertable> users = ud.selectByExample(example);
                 if (null == users || users.size() == 0) {
-                    Map<String, Object> res = new HashMap<>();
                     res.put("flag", false);
                     res.put("message", "用户不存在");
-                    resp.getWriter().println(JSON.toJSONString(res, true));
+                    resp.getWriter().println(JSON.toJSONString(res));
+                    return;
                 }
+                boolean flag = false;
                 for (Usertable u : users) {
                     if (u.getName().equals(name) && u.getPassword().equals(password)) {
-                        request.getSession().setAttribute("username", name);
-                        Map<String, Object> res = new HashMap<>();
-                        res.put("flag", true);
-                        res.put("message", "登陆成功");
-                        resp.getWriter().println(JSON.toJSONString(res, true));
+                        flag = true;
                         break;
                     }
                 }
+                res.put("flag", flag);
+                resp.getWriter().println(JSON.toJSONString(res));
                 session.commit();
             } catch (Exception e) {
                 session.rollback();
