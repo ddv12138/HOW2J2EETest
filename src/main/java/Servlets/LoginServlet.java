@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 for (Usertable u : users) {
                     if (u.getName().equals(name) && u.getPassword().equals(password)) {
+                        request.getSession().setAttribute("username", name);
                         Map<String, Object> res = new HashMap<>();
                         res.put("flag", true);
                         res.put("message", "登陆成功");
