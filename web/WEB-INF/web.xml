@@ -101,4 +101,13 @@
         <servlet-name>UpdateProductServlet</servlet-name>
         <url-pattern>/updateProduct</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PageJumpServlet</servlet-name>
+        <servlet-class>Servlets.PageJumpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PageJumpServlet</servlet-name>
+        <url-pattern>/pagejump</url-pattern>
+    </servlet-mapping>
 </web-app>

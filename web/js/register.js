@@ -4,7 +4,6 @@ window.onload = function () {
             username: $("#username").val(),
             password: $("#password").val()
         };
-        console.log(data);
         $.post("register", data, function () {
             console.log("res");
         })
