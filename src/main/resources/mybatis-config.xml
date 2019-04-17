@@ -24,7 +24,9 @@
     <mappers>
         <mapper class="CRUD.DAO.ProductMapper"/>
         <mapper class="CRUD.DAO.CategoryDao"/>
+        <mapper class="CRUD.DAO.UsertableDao"/>
         <mapper resource="generator/CategoryDao.xml"/>
         <mapper resource="generator/ProductDao.xml"/>
+        <mapper resource="generator/UsertableDao.xml"/>
     </mappers>
 </configuration>

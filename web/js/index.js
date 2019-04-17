@@ -4,6 +4,21 @@ $(document).ready(function () {
     $("#register").click(function () {
         window.open("register.html", "_self", "");
     });
+    $("#login_btn").click(function () {
+        let data = {
+            username: $("#username").val(),
+            password: $("#password").val()
+        };
+        $.post("login", data, function (arg) {
+            let res = JSON.parse(arg);
+            if (res.flag) {
+                window.open("listProduct", "_self", "");
+            } else {
+                alert("登陆失败");
+                $("#password").val("");
+            }
+        })
+    });
 
     let placeholders = document.querySelectorAll('.styled-input__placeholder-text'),
         inputs = document.querySelectorAll('.styled-input__input');
