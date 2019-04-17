@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
                 for (Usertable u : users) {
                     if (u.getName().equals(name) && u.getPassword().equals(password)) {
                         flag = true;
+                        request.getSession().setAttribute("username", name);
                         break;
                     }
                 }
