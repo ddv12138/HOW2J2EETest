@@ -14,16 +14,10 @@
 <div id="message"></div>
 <script>
     $('#submit').click(function () {
-        var name = document.getElementById('name').value;
-        var price = document.getElementById('price').value;
-        var Product = {"name": name, "price": price};
-        var url = "addProduct";
-        // $.ajax(
-        //     url,
-        //     {"data":JSON.stringify(Product)},
-        //     function(data) {
-        //         debugger;
-        //     });
+        let name = document.getElementById('name').value;
+        let price = document.getElementById('price').value;
+        let Product = {"name": name, "price": price};
+        let url = "addProduct";
         $.ajax({
             url: url, data: {"data": JSON.stringify(Product)}, complete: function (arg) {
                 console.log(arg)

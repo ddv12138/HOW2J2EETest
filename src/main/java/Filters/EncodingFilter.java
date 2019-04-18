@@ -16,7 +16,6 @@ public class EncodingFilter implements Filter {
         req.setCharacterEncoding("UTF-8");
         servletResponse.setCharacterEncoding("UTF-8");
         filterChain.doFilter(req, servletResponse);
-        System.out.println("encoding has been set");
     }
 
     @Override

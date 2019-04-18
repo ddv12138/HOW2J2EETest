@@ -17,7 +17,6 @@ public class HelloFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String ip = servletRequest.getRemoteAddr();
         String url = req.getRequestURL().toString();
-        System.out.printf("%s %s 访问了 %s%n", new Date(), ip, url);
         filterChain.doFilter(req, servletResponse);
     }
 

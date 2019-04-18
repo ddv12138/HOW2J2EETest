@@ -35,7 +35,6 @@ public class DeleteProductServlet extends HttpServlet {
             } finally {
                 session.close();
             }
-            resp.sendRedirect("listProduct");
         }
     }
 }

@@ -30,10 +30,14 @@ public class ListProductServlet extends HttpServlet {
         pe.setOrderByClause("id,name,price,cid");
         String page = req.getParameter("page");
         String limit = req.getParameter("limit");
+        pe.setOffset((long) ((Integer.parseInt(page) - 1) * Integer.parseInt(limit)));
+        pe.setLimit(Integer.parseInt(limit));
         List<Product> products = pm.selectByExample(pe);
+        long count = pm.countByExample(new ProductExample());
+        pe = new ProductExample();
         Map<String, Object> res = new HashMap<>();
         res.put("code", 0);
-        res.put("count", products.size());
+        res.put("count", count);
         res.put("data", products);
         resp.getWriter().write(JSON.toJSONString(res));
     }
