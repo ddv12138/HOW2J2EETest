@@ -5,11 +5,10 @@ window.onload = function () {
             password: $("#password").val()
         };
         $.post("register", data, function (arg) {
-            console.log(arg);
             let res = JSON.parse(arg);
             if (res.flag) {
                 alert("注册成功");
-                window.open("login.html", "_self", "");
+                window.open("index.html", "_self", "");
             } else {
                 alert("失败");
                 $("#username").val("");
