@@ -117,4 +117,13 @@
         <servlet-name>PageJumpServlet</servlet-name>
         <url-pattern>/pagejump</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <servlet-class>Servlets.ListCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <url-pattern>/listcategory</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -8,11 +8,10 @@ window.onload = function () {
             , cols: [[ //表头
                 {field: 'check', width: 50, title: '选择', type: 'checkbox'}
                 , {field: 'numbers', width: 50, title: '序号', type: 'numbers'}
-                , {field: 'id', title: 'ID', width: 300, sort: true}
                 , {field: 'name', title: '名称'}
                 , {field: 'price', title: '价格', sort: true}
-                , {field: 'cid', title: 'cid'}
-                , {field: 'opt', width: 200, title: '操作', fixed: 'right', toolbar: '#barDemo'}
+                , {field: 'categoryName', title: '分类', sort: true}
+                , {width: 200, title: '操作', fixed: 'right', toolbar: '#barDemo'}
             ]]
             , toolbar: true
             , defaultToolbar: ['filter', 'print', 'exports']
@@ -29,7 +28,9 @@ window.onload = function () {
                     url: "deleteProduct",
                     data: {"id": data.id},
                     complete: function () {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        table.reload('products', {
+                            url: 'listProduct'
+                        });
                     }
                 })
             } else if (layEvent === 'edit') { //编辑

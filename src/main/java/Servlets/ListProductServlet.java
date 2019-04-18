@@ -1,6 +1,7 @@
 package Servlets;
 
 import CRUD.DAO.ProductDao;
+import CRUD.DAO.ProductMapper;
 import CRUD.JavaBean.Product;
 import CRUD.JavaBean.ProductExample;
 import com.alibaba.fastjson.JSON;
@@ -25,16 +26,24 @@ public class ListProductServlet extends HttpServlet {
         InputStream reis = Resources.getResourceAsStream(resource);
         SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(reis);
         SqlSession session = ssf.openSession();
-        ProductDao pm = session.getMapper(ProductDao.class);
-        ProductExample pe = new ProductExample();
-        pe.setOrderByClause("id,name,price,cid");
+        ProductMapper pm = session.getMapper(ProductMapper.class);
+        ProductDao pd = session.getMapper(ProductDao.class);
+
         String page = req.getParameter("page");
         String limit = req.getParameter("limit");
-        pe.setOffset((long) ((Integer.parseInt(page) - 1) * Integer.parseInt(limit)));
-        pe.setLimit(Integer.parseInt(limit));
-        List<Product> products = pm.selectByExample(pe);
-        long count = pm.countByExample(new ProductExample());
-        pe = new ProductExample();
+        Map<String, Object> par = new HashMap<>();
+        if (null == page || null == limit) {
+            return;
+        }
+        par.put("offset", (long) ((Integer.parseInt(page) - 1) * Integer.parseInt(limit)));
+        par.put("limit", Integer.parseInt(limit));
+        List<Product> products = pm.ListProduct(par);
+        for (Product p : products) {
+            if (null != p.getCategory()) {
+                p.setCategoryName(p.getCategory().getName());
+            }
+        }
+        long count = pd.countByExample(new ProductExample());
         Map<String, Object> res = new HashMap<>();
         res.put("code", 0);
         res.put("count", count);
