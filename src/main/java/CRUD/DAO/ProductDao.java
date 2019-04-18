@@ -2,9 +2,7 @@ package CRUD.DAO;
 
 import CRUD.JavaBean.Product;
 import CRUD.JavaBean.ProductExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface ProductDao {

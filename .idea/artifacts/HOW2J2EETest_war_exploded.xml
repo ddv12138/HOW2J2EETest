@@ -1,10 +1,11 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="HOW2J2EETest:war exploded">
+  <artifact type="exploded-war" name="HOW2J2EETest:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/HOW2J2EETest_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="HOW2J2EETest" />
+          <element id="library" level="application" name="jquery" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.15" />
@@ -23,6 +24,7 @@
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
         </element>
       </element>
+      <element id="library" level="application" name="@types/jquery" />
       <element id="javaee-facet-resources" facet="HOW2J2EETest/web/Web" />
     </root>
   </artifact>

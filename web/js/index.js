@@ -12,7 +12,7 @@ $(document).ready(function () {
         $.post("login", data, function (arg) {
             let res = JSON.parse(arg);
             if (res.flag) {
-                window.open("listProduct", "_self", "");
+                window.open("productlist.html", "_self", "");
             } else {
                 alert("登陆失败");
                 $("#password").val("");

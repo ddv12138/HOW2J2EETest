@@ -44,6 +44,8 @@
               <option name="modelPackage" value="CRUD.JavaBean" />
               <option name="modelTargetFolder" value="$PROJECT_DIR$" />
               <option name="name" value="Product" />
+              <option name="needToStringHashcodeEquals" value="true" />
+              <option name="offsetLimit" value="true" />
               <option name="overrideXML" value="true" />
               <option name="primaryKey" value="" />
               <option name="projectFolder" value="$PROJECT_DIR$" />

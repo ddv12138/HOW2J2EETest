@@ -3,6 +3,7 @@ package Servlets;
 import CRUD.DAO.ProductDao;
 import CRUD.JavaBean.Product;
 import CRUD.JavaBean.ProductExample;
+import com.alibaba.fastjson.JSON;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListProductServlet extends HttpServlet {
     @Override
@@ -25,16 +28,13 @@ public class ListProductServlet extends HttpServlet {
         ProductDao pm = session.getMapper(ProductDao.class);
         ProductExample pe = new ProductExample();
         pe.setOrderByClause("id,name,price,cid");
+        String page = req.getParameter("page");
+        String limit = req.getParameter("limit");
         List<Product> products = pm.selectByExample(pe);
-        StringBuffer sb = new StringBuffer();
-        sb.append("<table align='center' border='1' cellspacing='0'>\r\n");
-        sb.append("<tr><td>id</td><td>name</td><td>price</td><td>cid</td></tr>\r\n");
-        String trFormat = "<tr><td>%s</td><td>%s</td><td>%f</td><td>%s</td><td><a href='editProduct?id=%s'>modify</a></td><td><a href='deleteProduct?id=%s'>delete</a></td></tr>\r\n";
-        for (Product product : products) {
-            String tr = String.format(trFormat, product.getId(), product.getName(), product.getPrice(), product.getCid(), product.getId(), product.getId());
-            sb.append(tr);
-        }
-        sb.append("</table>");
-        resp.getWriter().write(sb.toString());
+        Map<String, Object> res = new HashMap<>();
+        res.put("code", 0);
+        res.put("count", products.size());
+        res.put("data", products);
+        resp.getWriter().write(JSON.toJSONString(res));
     }
 }
