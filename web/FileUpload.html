@@ -2,13 +2,48 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="layui/css/layui.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
     <title>FileUpLoad</title>
 </head>
 <body>
-<form action="uploadPhoto" method="post" enctype="multipart/form-data">
-    英雄名称:<input type="text" name="heroName"/> <br>
-    上传头像 : <input type="file" name="filepath"/> <br>
-    <input type="submit" value="上传">
-</form>
+<button type="button" class="layui-btn" id="uploadfile">
+    <i class="layui-icon">&#xe67c;</i>上传
+</button>
+<div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="upload_progress_bar" lay-percent="0%">
+    <div id="upload_progress" class="layui-progress-bar"></div>
+</div>
 </body>
+<script>
+    layui.use(['upload', 'element'], function () {
+        let t;
+        layui.upload.render({
+            elem: '#uploadfile'
+            , url: 'uploadPhoto'
+            , accept: 'file'
+            // ,multiple:true
+            , done: function (res, index, upload) {
+                clearInterval(t);
+                layui.element.progress('upload_progress_bar', '100%');
+                $("#uploadfile").removeClass("layui-btn-disabled")
+            },
+            before: function () {
+                layui.element.progress('upload_progress_bar', '0%');
+                $("#uploadfile").addClass("layui-btn-disabled");
+                t = setInterval(function () {
+                    $.ajax({
+                        url: "fileuploadstatis",
+                        complete: function (arg) {
+                            if (arg.responseText && arg.responseText.indexOf("null") < 0) {
+                                let obj = JSON.parse(arg.responseText);
+                                layui.element.progress('upload_progress_bar', (obj.transfered / obj.fileSize).toFixed(2) * 100 + "%");
+                            }
+                        }
+                    })
+                }, 100)
+            }
+        });
+    });
+</script>
 </html>

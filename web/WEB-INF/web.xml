@@ -126,4 +126,13 @@
         <servlet-name>ListCategoryServlet</servlet-name>
         <url-pattern>/listcategory</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FileUploadStatus</servlet-name>
+        <servlet-class>Servlets.FileUploadStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadStatus</servlet-name>
+        <url-pattern>/fileuploadstatis</url-pattern>
+    </servlet-mapping>
 </web-app>
