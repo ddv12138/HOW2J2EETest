@@ -33,6 +33,9 @@ public class LoginStateFilter implements Filter {
         if (StringUtils.isEmpty(username)) {
             resp.sendRedirect("index.html");
             return;
+        } else if (req.getRequestURI().toLowerCase().endsWith("/")) {
+            resp.sendRedirect("productlist.html");
+            return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
