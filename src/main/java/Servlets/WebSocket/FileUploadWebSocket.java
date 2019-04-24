@@ -23,13 +23,15 @@ public class FileUploadWebSocket {
     @OnMessage
     public void Message(String filename, Session session) {
         try {
+            FIleUploadStatus lastfus = null;
             while (!isDone) {
                 String sessionid = this.httpSession.getId();
                 if (FileUploadSteteCollection.size() > 0) {
                     FIleUploadStatus fus = FileUploadSteteCollection.get(sessionid, filename);
-                    if (null != fus) {
+                    if (null != fus && (null == lastfus || (null != lastfus && lastfus.getTransfered() != fus.getTransfered()))) {
                         System.out.println("websocket发送");
                         session.getBasicRemote().sendText(JSON.toJSONString(fus));
+                        lastfus = fus;
                     }
                 }
             }

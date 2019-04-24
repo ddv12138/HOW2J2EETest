@@ -18,6 +18,15 @@ public class FIleUploadStatus {
         this.fileSize = fileSize;
     }
 
+    public String getPercent() {
+        return percent;
+    }
+
+    public void setPercent(String percent) {
+        this.percent = percent;
+    }
+
+
     @Override
     public int hashCode() {
         return Objects.hash(username, sessionid, fileName, fileSize);
