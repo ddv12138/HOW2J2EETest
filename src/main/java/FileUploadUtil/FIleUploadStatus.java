@@ -63,7 +63,7 @@ public class FIleUploadStatus {
     public void setTransfered(long transfered) {
         this.transfered = transfered;
         DecimalFormat df = new DecimalFormat("#.00");
-        this.percent = df.format((double) transfered / (double) fileSize);
+        this.percent = df.format((double) transfered / (double) fileSize * 100);
     }
 
     public Long getFileSize() {

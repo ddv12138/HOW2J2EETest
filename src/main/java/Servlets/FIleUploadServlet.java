@@ -43,7 +43,6 @@ public class FIleUploadServlet extends HttpServlet {
                         while ((readSize = is.read(cache)) > 0) {
                             transed += readSize;
                             System.out.println("文件上传中");
-                            fus.setBytePerSecond(readSize);
                             fus.setTransfered(transed);
                             FileUploadSteteCollection.put(req.getRequestedSessionId(), item.getName(), fus);
                             os.write(cache);
