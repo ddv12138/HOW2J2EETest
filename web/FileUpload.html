@@ -17,31 +17,67 @@
 </body>
 <script>
     layui.use(['upload', 'element'], function () {
-        let t;
+        var t;
+        var webSockets = [];
         layui.upload.render({
             elem: '#uploadfile'
             , url: 'uploadPhoto'
             , accept: 'file'
             // ,multiple:true
             , done: function (res, index, upload) {
-                clearInterval(t);
-                layui.element.progress('upload_progress_bar', '100%');
-                $("#uploadfile").removeClass("layui-btn-disabled")
+                // clearInterval(t);
+                // layui.element.progress('upload_progress_bar', '100%');
+                $("#uploadfile").removeClass("layui-btn-disabled");
+                for (var i = 0; i < webSockets.length; i++) {
+                    console.log(webSockets[i])
+                    webSockets[i].close();
+                }
+                webSockets = [];
             },
-            before: function () {
-                layui.element.progress('upload_progress_bar', '0%');
-                $("#uploadfile").addClass("layui-btn-disabled");
-                t = setInterval(function () {
-                    $.ajax({
-                        url: "fileuploadstatis",
-                        complete: function (arg) {
-                            if (arg.responseText && arg.responseText.indexOf("null") < 0) {
-                                let obj = JSON.parse(arg.responseText);
-                                layui.element.progress('upload_progress_bar', (obj.transfered / obj.fileSize).toFixed(2) * 100 + "%");
-                            }
+            before: function (arg) {
+                arg.preview(function (index, file, result) {
+                    // console.log(file)
+                    layui.element.progress('upload_progress_bar', '0%');
+                    $("#uploadfile").addClass("layui-btn-disabled");
+                    // t = setInterval(function () {
+                    //     $.ajax({
+                    //         url: "fileuploadstatis",
+                    //         data:{filename:file.name},
+                    //         complete: function (arg) {
+                    //             if (arg.responseText && arg.responseText.indexOf("null") < 0) {
+                    //                 let obj = JSON.parse(arg.responseText);
+                    //                 layui.element.progress('upload_progress_bar', (obj.transfered / obj.fileSize).toFixed(2) * 100 + "%");
+                    //             }
+                    //         }
+                    //     })
+                    // }, 100);
+                    if ("WebSocket" in window) {
+                        var contextPath = document.location.pathname;
+                        var index = contextPath.substr(1).indexOf("/");
+                        contextPath = contextPath.substr(0, index + 1);
+                        if (document.location.port) {
+                            var url = "ws://" + window.location.host + ":" + document.location.port + contextPath + "/ws/fileUploadState";
+                        } else {
+                            var url = "ws://" + window.location.host + contextPath + "/ws/fileUploadState";
                         }
-                    })
-                }, 100)
+                        var ws = new WebSocket(url);
+                        ws.onopen = function () {
+                            ws.send(file.name);
+                        }
+                        ws.onmessage = function (arg) {
+                            let obj = JSON.parse(arg.data);
+                            // console.log(obj)
+                            layui.element.progress('upload_progress_bar', (obj.transfered / obj.fileSize).toFixed(2) * 100 + "%");
+                        };
+                        ws.onclose = function () {
+                            console.log("连接已关闭...");
+                        };
+                        window.onbeforeunload = function () {
+                            ws.close();
+                        }
+                        webSockets.push(ws);
+                    }
+                })
             }
         });
     });

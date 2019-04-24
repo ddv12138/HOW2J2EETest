@@ -1,6 +1,7 @@
 package Servlets;
 
 import FileUploadUtil.FIleUploadStatus;
+import FileUploadUtil.FileUploadSteteCollection;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,24 +36,21 @@ public class FIleUploadServlet extends HttpServlet {
                     f.getParentFile().mkdirs();
                     try (InputStream is = item.getInputStream();
                          OutputStream os = new FileOutputStream(f)) {
-                        FIleUploadStatus fus;
-                        if (null == req.getSession().getAttribute("fus")) {
-                            fus = new FIleUploadStatus((String) req.getSession().getAttribute("username"), req.getRequestedSessionId(), item.getName(), item.getSize());
-                        } else {
-                            fus = (FIleUploadStatus) req.getSession().getAttribute("fus");
-                        }
+                        FIleUploadStatus fus = new FIleUploadStatus((String) req.getSession().getAttribute("username"), req.getRequestedSessionId(), item.getName(), item.getSize());
                         byte[] cache = new byte[10 * 100];
                         long readSize;
                         long transed = 0;
                         while ((readSize = is.read(cache)) > 0) {
                             transed += readSize;
+                            System.out.println("文件上传中");
                             fus.setBytePerSecond(readSize);
                             fus.setTransfered(transed);
-                            req.getSession().setAttribute("fus", fus);
+                            FileUploadSteteCollection.put(req.getRequestedSessionId(), item.getName(), fus);
                             os.write(cache);
                         }
                         os.flush();
                     }
+                    FileUploadSteteCollection.remove(req.getRequestedSessionId(), item.getName());
                 }
             }
             String url = "uploadFile/" + filename;
@@ -60,7 +58,6 @@ public class FIleUploadServlet extends HttpServlet {
             res.put("code", 0);
             res.put("url", url);
             resp.getWriter().println(JSON.toJSONString(res));
-            req.getSession().removeAttribute("fus");
         } catch (Exception e) {
             e.printStackTrace();
         }
