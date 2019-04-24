@@ -40,6 +40,7 @@ public class FileUploadWebSocket {
 
     @OnClose
     public void onClose() {
+        System.out.println("websocket关闭");
         this.isDone = true;
     }
 

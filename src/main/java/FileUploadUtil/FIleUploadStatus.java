@@ -1,5 +1,6 @@
 package FileUploadUtil;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class FIleUploadStatus {
@@ -8,32 +9,13 @@ public class FIleUploadStatus {
     private String fileName;
     private long transfered;
     private long fileSize;
-    private long bytePerSecond;
-
-    public long getBytePerSecond() {
-        return bytePerSecond;
-    }
-
-    public void setBytePerSecond(long bytePerSecond) {
-        this.bytePerSecond = bytePerSecond;
-    }
+    private String percent;
 
     public FIleUploadStatus(String username, String sessionid, String fileName, Long fileSize) {
         this.username = username;
         this.sessionid = sessionid;
         this.fileName = fileName;
         this.fileSize = fileSize;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FIleUploadStatus that = (FIleUploadStatus) o;
-        return Objects.equals(username, that.username) &&
-                Objects.equals(sessionid, that.sessionid) &&
-                Objects.equals(fileName, that.fileName) &&
-                Objects.equals(fileSize, that.fileSize);
     }
 
     @Override
@@ -71,6 +53,8 @@ public class FIleUploadStatus {
 
     public void setTransfered(long transfered) {
         this.transfered = transfered;
+        DecimalFormat df = new DecimalFormat("#.00");
+        this.percent = df.format((double) transfered / (double) fileSize);
     }
 
     public Long getFileSize() {
